@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int horas, minutos, segundos, horasFinales, minutosFinales, segundosFinales;
+    cout<<"Dame las hora de inicio..: "; cin>>horas;
+    cout<<"Dame las minutos de inicio..: "; cin>>minutos;
+    cout<<"Dame las segundos de inicio..: "; cin>>segundos;
+    cout<<"Dame las hora de inicio..: "; cin>>horasFinales;
+    cout<<"Dame las minutos de inicio..: "; cin>>minutosFinales;
+    cout<<"Dame las segundos de inicio..: "; cin>>segundosFinales;
+
+    segundos+=horas*3600; segundos+=minutos*60;
+    segundosFinales+=horasFinales*3600; segundosFinales+=minutosFinales*60;
+
+    if (segundosFinales>segundos)
+    {
+        segundosFinales-=segundos;
+        minutosFinales=segundosFinales/60;
+        segundosFinales%=60;
+        horasFinales=minutosFinales/60;
+        minutosFinales%=60;
+        cout<<horasFinales<<" horas   "<<minutosFinales<<" minutos  "<<segundosFinales<<" segundos";
+    }
+    else
+    {
+        cout<<"Los datos iniciales son mas grandes que los finales, tiempos incorrectos";
+    }
+    return 0;
+}
