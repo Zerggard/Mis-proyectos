@@ -1,0 +1,93 @@
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+int main()
+{
+    int opcion, numero, factorial, primo, calificacion,suma;
+    float promedio;
+    do
+    {
+        system("CLS");
+        cout<<"1 .- Saber si es primo\n";
+        cout<<"2 .- Factorial hasta numero\n";
+        cout<<"3 .- Promedio de materias\n";
+        cout<<"Elige opcion..: ";cin>>opcion;
+
+        switch (opcion)
+        {
+        case 1:
+            {
+                primo=0;
+                system("CLS");
+                cout<<"Dame un numero..: "; cin>>numero;
+                for (int conta=1;conta<=numero; conta++)
+                {
+                    if (numero%conta == 0)
+                    {
+                        primo++;
+                    }
+
+                }
+                if (primo<=2)
+                {
+                    cout<<"El numero "<<numero<<" es primo\n";
+                }
+                else
+                {
+                    cout<<"El numero "<<numero<<" no es primo\n";
+                }
+                system("PAUSE");
+                break;
+            }
+        case 2:
+            {
+                factorial=1;
+                system("CLS");
+                cout<<"Dame un numero..: "; cin>>numero;
+
+                for (int conta=1;conta<numero+1; conta++)
+                {
+                    factorial*=conta;
+                }
+                cout<<"El factorial es..: "<<factorial<<"\n";
+                system("PAUSE");
+                break;
+            }
+        case 3:
+            {
+                promedio=0;
+                suma=0;
+                system("CLS");
+                numero=0;
+                do
+                {
+                    cout<<"Dame calificacion "<<numero+1<<"..:";cin>>calificacion;
+                    if (calificacion<=10)
+                    {
+                        if (calificacion==-1)
+                        {
+
+                            promedio=suma/numero;
+                        }
+                        else
+                        {
+                            suma+=calificacion;
+                        }
+                        numero++;
+                    }
+                    else
+                    {
+                        cout<<"El numero que introdujo es invalido\n";
+                    }
+
+                }
+                while (calificacion!=-1);
+                cout<<"El promedio de "<<numero-1<<" calificaciones es..: "<<promedio<<"\n";
+                system("PAUSE");
+                break;
+            }
+        }
+    }
+    while (opcion !=0 );
+    return 0;
+}
