@@ -1,0 +1,57 @@
+#include <iostream>
+#include <stdlib.h>
+#include <math.h>
+using namespace std;
+int main()
+{
+    int opcion;
+    do
+    {
+        system("CLS");
+        cout<<"1 .- Calcular constante matematica e\n";
+        cout<<"2 .- Calcular constante matematica al cuadrado e²\n";
+        cout<<"0 .- Salir\n";
+        cout<<"Elige opcion..: ";cin>>opcion;
+
+        switch (opcion)
+        {
+        case 1:
+            {
+                system("CLS");
+                int numero, factorial=1;
+                float e=1.0;
+                cout<<"Dame un numero..: "; cin>>numero;
+
+                for (int conta=1;conta<numero+1; conta++)
+                {
+                    factorial*=conta;
+                    e+=1.0/factorial;
+                }
+                cout<<"e..: "<<e<<"\n";
+                system("PAUSE");
+                break;
+            }
+        case 2:
+            {
+                system("CLS");
+                int numero,numero2, factorial=1;
+                float eElevado=1.0, e=1.0;
+                cout<<"Dame el valor de X..: "; cin>>numero;
+                cout<<"Hasta donde quieres terminar..: "; cin>>numero2;
+
+                for (int conta=1;conta<=numero2; conta++)
+                {
+                    factorial*=conta;
+                    eElevado+= pow(numero,conta)/factorial;
+                }
+                e=pow(eElevado,(1.0/numero));
+                cout<<"e a la "<<numero<<" es..: "<<eElevado<<"\n";
+                cout<<"e despejado es..: "<<e<<"\n";
+                system("PAUSE");
+                break;
+            }
+        }
+    }
+    while (opcion !=0 );
+    return 0;
+}
