@@ -1,0 +1,146 @@
+#include <iostream>
+#include <math.h>
+#include <stdlib.h>
+using namespace std;
+int menu();
+float seno(float x,float limite);
+float coseno(float x,float limite);
+float logaritmoNatural(float x,float limite);
+float factorial(int numero);
+int main()
+{
+    int opcion;
+    do
+    {
+        system("CLS");
+        opcion=menu();
+        switch (opcion)
+        {
+        case 1:
+            {
+                system("CLS");
+                float x,limite;
+                float resultado;
+                cout<<"Dame el valor de x..: "; cin>>x;
+                cout<<"Dame el limite de repeticion..: ";cin>>limite;
+                resultado=seno(x,limite);
+                cout<<"El resultado de repeticion de seno al limite "<<limite<<" es..: "<<resultado<<"\n";
+                system("PAUSE");
+                break;
+            }
+        case 2:
+            {
+                system("CLS");
+                float x,limite;
+                float resultado;
+                cout<<"Solo valores positivos\n";
+                cout<<"Dame el valor de x..: "; cin>>x;
+                cout<<"Dame el limite de repeticion..: ";cin>>limite;
+                if(x>0 && limite>0)
+                {
+                    resultado=coseno(x,limite);
+                    cout<<"El resultado de repeticion de coseno al limite "<<limite<<" es..: "<<resultado<<"\n";
+                }
+                else
+                {
+                    cout<<"FAVOR DE USAR VALORES VALIDOS\n";
+                }
+                system("PAUSE");
+                break;
+            }
+        case 3:
+            {
+                system("CLS");
+                float x,limite;
+                float resultado;
+                cout<<"Solo numero positivos";
+                cout<<"Dame el valor de x..: "; cin>>x;
+                cout<<"Dame el limite de repeticion..: ";cin>>limite;
+                if(x>0 && limite>0)
+                {
+                    resultado=logaritmoNatural(x,limite);
+                    cout<<"El resultado de repeticion de logaritmo natural al limite "<<limite<<" es..: "<<resultado<<"\n";
+                }
+                else
+                {
+                    cout<<"FAVOR DE USAR VALORES VALIDOS\n";
+                }
+                system("PAUSE");
+                break;
+            }
+        }
+
+    }while(opcion!=0);
+    return 0;
+}
+int menu()
+{
+    int opcion;
+    do
+    {
+        system("CLS");
+        cout<<"1.- Calcular aproximacion de seno\n";
+        cout<<"2.- Calcular aproximacion de coseno\n";
+        cout<<"3.- Calcular aproximacion de lagoritmo natural\n";
+        cout<<"0.- Salir\n";
+        cout<<"Elige opcion..: "; cin>>opcion;
+    }while(opcion<0 || opcion>3);
+    return opcion;
+}
+float seno(float x,float limite)
+{
+    float resultado=x;
+
+    for (int conta=2, elevar=3;conta<=limite;conta++)
+    {
+        if (conta%2==0)
+        {
+            resultado-=(pow(x,elevar))/factorial(elevar);
+        }
+        else
+        {
+            resultado+=(pow(x,elevar))/factorial(elevar);
+
+        }
+    elevar+=2;
+    }
+    return resultado;
+}
+float coseno(float x,float limite)
+{
+    float resultado=1;
+    for (int conta=2, elevar=2;conta<=limite;conta++)
+    {
+        if (conta%2==0)
+        {
+            resultado-=(pow(x,elevar))/factorial(elevar);
+        }
+        else
+        {
+            resultado+=(pow(x,elevar))/factorial(elevar);
+
+        }
+    elevar+=2;
+    }
+    return resultado;
+}
+float logaritmoNatural(float x,float limite)
+{
+    float resultado=0;
+    float valor=(x-1)/x;
+
+    for(float conta=1;conta<=limite; conta++)
+    {
+        resultado+=((1/conta)*(pow(valor,conta)));
+    }
+    return resultado;
+}
+float factorial(int numero)
+{
+    float factorial=1;
+    for (int conta=1;conta<numero+1; conta++)
+    {
+        factorial*=conta;
+    }
+    return factorial;
+}
