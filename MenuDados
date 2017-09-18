@@ -1,0 +1,79 @@
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+using namespace std;
+void imprimeArreglo(int arreglo [], int tamano);
+int lanzamientoDado();
+void histograma(int tamano);
+int menu();
+int main()
+{
+    srand(time(NULL));
+    int opcion;
+    do
+    {
+        opcion=menu();
+        if (opcion==1)
+        {
+            int numeroDelDado[6]={0};
+            int numero;
+            for(int conta=0; conta<100; conta++)
+            {
+                numero=lanzamientoDado();
+                numeroDelDado[numero-1]++;
+            }
+        cout<<"Numero de veces que calleron los numeros de las caras del dado.\n";
+        imprimeArreglo(numeroDelDado,6);
+        system("PAUSE");
+        }
+        if (opcion==2)
+        {
+            int sumas[12]={0};
+            int numero;
+            for(int conta=0; conta<100; conta++)
+            {
+                numero=lanzamientoDado()+lanzamientoDado();
+                sumas[numero-1]++;
+            }
+        cout<<"Numero de veces que calleron los numeros de las caras del dado.\n";
+        imprimeArreglo(sumas,12);
+        system("PAUSE");
+        }
+    }while(opcion!=0);
+    return 0;
+}
+int lanzamientoDado()
+{
+    int numero=1+rand()%6;
+    return numero;
+}
+void imprimeArreglo(int arreglo [], int tamano)
+{
+    int numero;
+    for(int conta=0; conta<tamano; conta++)
+    {
+        cout<<conta+1<<" = ";histograma(arreglo[conta]);
+        cout<<endl;
+    }
+}
+int menu()
+{
+    int opcion;
+    do
+    {
+        system("CLS");
+        cout<<"1.- LANZAMIENTO DE UN DADO 100 VECES\n";
+        cout<<"2.- LANZAMIENTO DE DOS DADOS Y LA SUMA DE SUS CARAS\n";
+        cout<<"0.- SALIR\n";
+        cout<<"Elige opcion..: "; cin>>opcion;
+    }while(opcion<0 || opcion>2);
+    return opcion;
+}
+void histograma(int tamano)
+{
+    for (int conta=0;conta<tamano;conta++)
+    {
+        cout<<"*";
+    }
+    cout<<endl;
+}
