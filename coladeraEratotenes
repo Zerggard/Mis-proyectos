@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+void llenarVector(int vec[], int tamano);
+int main()
+{
+    int vec[1000];
+    llenarVector(vec,1000);
+    for (int conta=2;conta<999;conta++)
+    {
+        if(vec[conta]==1)
+        {
+            for(int conta2=conta*2;conta2<=999;conta2+=conta)
+            {
+                vec[conta2]=0;
+            }
+        }
+    }
+    for (int conta=1;conta<1000;conta++)
+    {
+        if(vec[conta]!=0)
+        {
+            cout<<"El numero "<<conta<<" es primo"<<endl;
+        }
+    }
+    return 0;
+}
+void llenarVector(int vec[], int tamano)
+{
+    for(int conta=0;conta<=tamano;conta++)
+        vec[conta]=1;
+}
