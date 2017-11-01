@@ -6,14 +6,14 @@ void plumaHaciaArriba(int &pluma);
 void plumaHaciaAbajo(int &pluma);
 void girarIzquierda(int &frente);
 void girarDerecha(int &frente);
-void Avanzar(char matriz[][20], int tamano, int frente, int &r, int &c);
-void guardarAvance(char matriz[][20], int tamano, int frente, int r, int c);
+void Avanzar(int frente, int r, int c, int &avance);
+void guardarAvance(char matriz[][20], int tamano, int frente, int &r, int &c, int avance);
 void ImprimirEscenario(char matriz[][20],int tamano);
 
 int main()
 {
     char escenario[20][20]={' '};
-    int frente=6;
+    int frente=6, avance=0;
     int r=0, c=0, comando=0, pluma=0;
     cout<<"EN ESTE PROGRAMA UNA TORTUGA SOSTIENE UNA PLUMA EN 2 POSICIONES\n";
     cout<<"ARRIBA PARA NO ESCRIBIR Y ABAJO PARA DINUJAR UNA LINEA, LA TORTUGA INICIA\n";
@@ -40,7 +40,6 @@ int main()
         case 2:
             {
                 plumaHaciaAbajo(pluma);
-                guardarAvance(escenario,20,frente,r,c);
                 break;
             }
         case 3:
@@ -55,16 +54,18 @@ int main()
             }
         case 5:
             {
+                cout<<"Cuntos pasos quieres avanzar..: "; cin>>avance;
+                avance--;
                 if (comando==5 && pluma==1)
                 {
-                    Avanzar(escenario,20,frente,r,c);
-                    guardarAvance(escenario,20,frente,r,c);
+                    Avanzar(frente,r,c,avance);
+                    guardarAvance(escenario,20,frente,r,c,avance);
                     cout<<r<<c;
 
                 }
                 else
                 {
-                    Avanzar(escenario,20,frente,r,c);
+                    Avanzar(frente,r,c,avance);
                 }
                 break;
             }
@@ -137,36 +138,36 @@ void girarDerecha(int &frente)
         }
     }
 }
-void Avanzar(char matriz[][20], int tamano, int frente, int &r, int &c)
+void Avanzar(int frente, int r, int c,int &avance)
 {
     switch (frente)
     {
     case 6:
         {
-            c++;
-            if (c>19)
-                c=19;
+            avance+=c;
+            if (avance>19)
+                avance=19;
             break;
         }
     case 4:
         {
-            c--;
-            if (c<0)
-                c=0;
+            avance-=c;
+            if (avance<0)
+                avance=0;
             break;
         }
     case 8:
         {
-            r--;
-            if(r<0)
-                r=0;
+            avance-=r;
+            if(avance<0)
+                avance=0;
             break;
         }
     case 2:
         {
-            r++;
-            if (r>19)
-                r=19;
+            avance+=r;
+            if (avance>19)
+                avance=19;
             break;
         }
     }
@@ -182,21 +183,47 @@ void ImprimirEscenario(char matriz[][20],int tamano)
         cout<<endl;
     }
 }
-void guardarAvance(char matriz[][20], int tamano, int frente, int r, int c)
+void guardarAvance(char matriz[][20], int tamano, int frente, int &r, int &c, int avance)
 {
-    if (matriz[r][c]=='_'|| matriz[r][c]=='|')
+    cout<<"R= "<<r<<"  C= "<<c<<" AVANCE= "<<avance;
+    if (frente==4 || frente==6)
     {
-
-    }
-    else
-    {
-        if (frente==4 || frente==6)
+        if (avance>c)
         {
-            matriz[r][c]='_';
+            for(int conta=c;conta<=avance;conta++)
+            {
+                if(matriz[r][conta]!='_' && matriz[r][conta]!='|')
+                    matriz[r][conta]='_';
+            }
         }
         else
         {
-            matriz[r][c]='|';
+            for(int conta=c;conta>=avance;conta--)
+            {
+                if(matriz[r][conta]!='_' && matriz[r][conta]!='|')
+                    matriz[r][conta]='_';
+            }
         }
+        c=avance;
+    }
+    else
+    {
+        if(avance>r)
+        {
+            for(int conta=r;conta<=avance;conta++)
+            {
+                if(matriz[conta][c]!='_' && matriz[conta][c]!='|')
+                    matriz[conta][c]='|';
+            }
+        }
+        else
+        {
+            for(int conta=r;conta>=avance;conta--)
+            {
+                if(matriz[conta][c]!='_' && matriz[conta][c]!='|')
+                    matriz[conta][c]='|';
+            }
+        }
+        r=avance;
     }
 }
