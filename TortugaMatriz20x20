@@ -185,7 +185,6 @@ void ImprimirEscenario(char matriz[][20],int tamano)
 }
 void guardarAvance(char matriz[][20], int tamano, int frente, int &r, int &c, int avance)
 {
-    cout<<"R= "<<r<<"  C= "<<c<<" AVANCE= "<<avance;
     if (frente==4 || frente==6)
     {
         if (avance>c)
